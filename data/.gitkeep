@@ -1,0 +1,10 @@
+# Arquivos de dados brutos (CSV, Excel)
+*.csv
+*.xlsx
+*.xls
+
+# Dados processados temporários
+processed/
+temp/
+
+# Este diretório deve conter apenas dados de exemplo e templates
