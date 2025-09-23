@@ -2,6 +2,7 @@
 🤖 Agente de IA para Marketing - MVP
 Versão inicial do sistema para análise de dados e geração de planos de marketing
 """
+
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -10,17 +11,19 @@ from datetime import datetime
 import os
 import sys
 
-# Adicionar o diretório raiz ao path para imports
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# Ajustar path para src
+SRC_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src')
+if SRC_PATH not in sys.path:
+    sys.path.insert(0, SRC_PATH)
 
 try:
-    from utils.data_processor import DataProcessor
-    from analysis.basic_analysis import BasicAnalyzer
-    from templates.report_generator import ReportGenerator
-    from api.google_sheets import google_sheets_data_loader, create_sample_google_form_data
-    from utils.helpers import generate_sample_data, show_dataframe_info, DataQualityChecker
+    from src.services.data.dataProcessor import DataProcessor
+    from src.services.analysis.statisticalAnalysis import BasicAnalyzer
+    from src.services.reporting.reportGenerator import ReportGenerator
+    from src.services.external.googleSheetsService import google_sheets_data_loader, create_sample_google_form_data
+    from src.services.data.helpers import generate_sample_data, show_dataframe_info, DataQualityChecker
 except ImportError as e:
-    st.error(f"Erro ao importar módulos: {e}")
+    st.error(f"Erro ao importar módulos migrados: {e}")
     st.stop()
 
 # Configuração da página

@@ -1,6 +1,18 @@
+
 # 💬 Histórico de Conversas - Agente Marketing IA
 
 > Documentação das conversas e decisões técnicas do projeto
+
+## 22/09/2025 — Decisão: Remoção de Streamlit e apps legados
+
+- **Contexto:** O frontend principal do projeto passou a ser gerado pelo Lovable (Next.js/React), tornando o uso do Streamlit e dos apps legados (ex: app_tally_integration.py) desnecessário para o fluxo principal.
+- **Ações:**
+   - Remover a etapa "Garantir compatibilidade com Streamlit" do roadmap.
+   - Remover o arquivo `app_tally_integration.py` e outros apps legados não utilizados.
+   - Marcar essas tarefas como concluídas no roadmap.
+- **Justificativa:** Não há mais dependências ou fluxos ativos utilizando Streamlit ou os apps legados, garantindo foco total na nova stack frontend.
+
+---
 
 ## 📋 Índice
 - [Conversa 1: Análise do Roadmap Inicial](#conversa-1)
@@ -161,8 +173,31 @@ agente-marketing/
 ### Próximos Passos
 1. ✅ Estrutura de pastas criada
 2. ✅ Documentação técnica completa
-3. 🔄 Migrar código para nova estrutura (próximo)
+3. 🔄 Migrar código Streamlit/Pandas para nova estrutura `/src` (próximo)
 4. 📝 Implementar autenticação e PostgreSQL (futuro)
+5. 🚫 Evitar distrações com integrações externas (webhook, ngrok, formulários React) que não estejam no roadmap do agente-marketing.
+6. 📋 Foco: modularizar, documentar e evoluir o core do agente-marketing antes de novas integrações.
+---
+
+## 🚦 Conversa 7: Diagnóstico de Foco e Alinhamento
+**Data:** 22 de setembro de 2025
+**Tópicos:** Alinhamento de escopo, foco do projeto, integração externa
+
+### Diagnóstico
+- O projeto principal é o `agente-marketing` (Python + Streamlit + Pandas + Plotly + Google Sheets API).
+- O MVP já foi entregue e testado.
+- O roadmap e as ADRs definem como próximos passos a migração do código para a estrutura enterprise e, depois, autenticação e banco relacional.
+- As discussões recentes sobre webhooks, ngrok, deploys FastAPI e integrações de formulário React dizem respeito a outro projeto (ex: `analise-marketing`) e não ao core do agente-marketing.
+
+### Decisão
+- **Foco imediato:** migrar e modularizar o código do agente-marketing para a nova estrutura enterprise.
+- **Evitar:** gastar tempo com integrações externas não previstas no roadmap.
+- **Próximos passos:**
+   1. Mapear e migrar funções e módulos para `src/services/`, `src/components/`, etc.
+   2. Garantir que a documentação reflita o código real.
+   3. Só após isso, planejar novas integrações ou evoluções.
+
+---
 
 ---
 

@@ -13,36 +13,35 @@ def test_imports():
     try:
         # Teste básico dos módulos
         sys.path.append(str(Path(__file__).parent))
-        
-        from utils.data_processor import DataProcessor
-        print("✅ utils.data_processor")
-        
-        from analysis.basic_analysis import BasicAnalyzer
-        print("✅ analysis.basic_analysis")
-        
-        from templates.report_generator import ReportGenerator
-        print("✅ templates.report_generator")
-        
-        from api.google_sheets import GoogleSheetsIntegration
-        print("✅ api.google_sheets")
-        
-        from utils.helpers import generate_sample_data
-        print("✅ utils.helpers")
-        
-        return True
-        
-    except ImportError as e:
-        print(f"❌ Erro de importação: {e}")
-        return False
+        try:
+            from src.services.data.dataProcessor import DataProcessor
+            print("✅ src.services.data.dataProcessor")
+
+            from src.services.analysis.statisticalAnalysis import BasicAnalyzer
+            print("✅ src.services.analysis.statisticalAnalysis")
+
+            from src.services.reporting.reportGenerator import ReportGenerator
+            print("✅ src.services.reporting.reportGenerator")
+
+            from src.services.external.googleSheetsService import GoogleSheetsIntegration
+            print("✅ src.services.external.googleSheetsService")
+
+            from src.services.data.helpers import generate_sample_data
+            print("✅ src.services.data.helpers")
+
+            return True
+        except ImportError as e:
+            print(f"❌ Erro de importação: {e}")
+            return False
 
 def test_data_processing():
     """Testar processamento de dados"""
     print("\n📊 Testando processamento de dados...")
     
     try:
-        from utils.helpers import generate_sample_data
-        from utils.data_processor import DataProcessor
-        from analysis.basic_analysis import BasicAnalyzer
+        from src.services.data.helpers import generate_sample_data
+        from src.services.data.dataProcessor import DataProcessor
+        from src.services.analysis.statisticalAnalysis import BasicAnalyzer
         
         # Gerar dados de teste
         df = generate_sample_data()
@@ -68,16 +67,18 @@ def test_data_processing():
 def create_test_run():
     """Criar arquivo de teste rápido"""
     test_content = '''
-import pandas as pd
-import sys
-from pathlib import Path
 
-# Adicionar diretório ao path
-sys.path.append(str(Path(__file__).parent))
+    import pandas as pd
+    import sys
+    from pathlib import Path
 
-from utils.helpers import generate_sample_data
-from analysis.basic_analysis import BasicAnalyzer
-from templates.report_generator import ReportGenerator
+    # Adicionar diretório ao path
+    sys.path.append(str(Path(__file__).parent))
+
+    from src.services.data.helpers import generate_sample_data
+    from src.services.analysis.statisticalAnalysis import BasicAnalyzer
+    from src.services.reporting.reportGenerator import ReportGenerator
+
 
 def main():
     print("🚀 Teste rápido do Agente de IA para Marketing")
