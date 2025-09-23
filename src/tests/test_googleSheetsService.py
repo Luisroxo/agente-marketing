@@ -1,5 +1,5 @@
 import pytest
-from services.external.googleSheetsService import *
+
 
 def test_import_googleSheetsService():
     # Testa se o módulo importa sem erro

@@ -1,27 +1,30 @@
-from src.services.logging_config import get_logger
-
-logger = get_logger(__name__)
 """
 Módulo de Apresentação de Propostas
 Cria apresentações profissionais para propostas de marketing
 """
+from src.services.logging_config import get_logger
 
+logger = get_logger(__name__)
 from dataclasses import dataclass
 from typing import List, Dict, Optional
 import streamlit as st
 
+
 @dataclass
 class PresentationSlide:
     """Slide da apresentação"""
+
     title: str
     content: str
     slide_type: str  # "cover", "content", "chart", "table", "summary"
     order: int
     notes: Optional[str] = None
 
+
 @dataclass
 class PresentationTheme:
     """Tema da apresentação"""
+
     primary_color: str
     secondary_color: str
     accent_color: str
@@ -29,23 +32,24 @@ class PresentationTheme:
     text_color: str
     font_family: str
 
+
 class ProposalPresentation:
     """Gerador de apresentações de propostas"""
-    
+
     def __init__(self):
         self.themes = self._load_themes()
         self.default_theme = "professional"
-    
+
     def _load_themes(self) -> Dict[str, PresentationTheme]:
         """Carregar temas de apresentação"""
         return {
             "professional": PresentationTheme(
                 primary_color="#1f4e79",
-                secondary_color="#2e75b6", 
+                secondary_color="#2e75b6",
                 accent_color="#ffd700",
                 background_color="#ffffff",
                 text_color="#333333",
-                font_family="Arial, sans-serif"
+                font_family="Arial, sans-serif",
             ),
             "modern": PresentationTheme(
                 primary_color="#2c3e50",
@@ -53,7 +57,7 @@ class ProposalPresentation:
                 accent_color="#e74c3c",
                 background_color="#ecf0f1",
                 text_color="#2c3e50",
-                font_family="Helvetica, sans-serif"
+                font_family="Helvetica, sans-serif",
             ),
             "creative": PresentationTheme(
                 primary_color="#8e44ad",
@@ -61,55 +65,59 @@ class ProposalPresentation:
                 accent_color="#f39c12",
                 background_color="#f8f9fa",
                 text_color="#2c3e50",
-                font_family="Georgia, serif"
-            )
+                font_family="Georgia, serif",
+            ),
         }
-    
-    def generate_presentation(self, proposal, theme_name: str = "professional") -> List[PresentationSlide]:
+
+    def generate_presentation(
+        self, proposal, theme_name: str = "professional"
+    ) -> List[PresentationSlide]:
         """Gerar apresentação completa"""
-        
+
         theme = self.themes.get(theme_name, self.themes[self.default_theme])
         slides = []
-        
+
         # Slide 1: Capa
         slides.append(self._create_cover_slide(proposal, theme))
-        
+
         # Slide 2: Agenda
         slides.append(self._create_agenda_slide(theme))
-        
+
         # Slide 3: Situação Atual
         slides.append(self._create_situation_slide(proposal, theme))
-        
+
         # Slide 4: Análise e Oportunidades
         slides.append(self._create_analysis_slide(proposal, theme))
-        
+
         # Slide 5: Nossa Proposta
         slides.append(self._create_proposal_overview_slide(proposal, theme))
-        
+
         # Slides 6-N: Estratégias (uma por slide)
         for i, strategy in enumerate(proposal.strategies, 6):
             slides.append(self._create_strategy_slide(strategy, i, theme))
-        
+
         # Slide N+1: Cronograma
         slides.append(self._create_timeline_slide(proposal, theme))
-        
+
         # Slide N+2: Investimento e ROI
         slides.append(self._create_investment_slide(proposal, theme))
-        
+
         # Slide N+3: Métricas de Sucesso
         slides.append(self._create_metrics_slide(proposal, theme))
-        
+
         # Slide N+4: Próximos Passos
         slides.append(self._create_next_steps_slide(proposal, theme))
-        
+
         # Slide N+5: Obrigado/Contato
         slides.append(self._create_closing_slide(theme))
-        
+
         return slides
-    
-    def _create_cover_slide(self, proposal, theme: PresentationTheme) -> PresentationSlide:
+
+    def _create_cover_slide(
+        self, proposal, theme: PresentationTheme
+    ) -> PresentationSlide:
         """Criar slide de capa"""
-        
+
         content = f"""
         <div style="text-align: center; padding: 50px; background: linear-gradient(135deg, {theme.primary_color}, {theme.secondary_color}); color: white; border-radius: 15px;">
             <h1 style="font-size: 3em; margin-bottom: 20px; font-family: {theme.font_family};">
@@ -134,18 +142,18 @@ class ProposalPresentation:
             </p>
         </div>
         """
-        
+
         return PresentationSlide(
             title="Proposta de Marketing",
             content=content,
             slide_type="cover",
             order=1,
-            notes="Slide de abertura com informações principais da proposta"
+            notes="Slide de abertura com informações principais da proposta",
         )
-    
+
     def _create_agenda_slide(self, theme: PresentationTheme) -> PresentationSlide:
         """Criar slide de agenda"""
-        
+
         content = f"""
         <div style="padding: 30px; font-family: {theme.font_family};">
             <h2 style="color: {theme.primary_color}; border-bottom: 3px solid {theme.accent_color}; padding-bottom: 10px;">
@@ -187,21 +195,23 @@ class ProposalPresentation:
             </div>
         </div>
         """
-        
+
         return PresentationSlide(
             title="Agenda",
             content=content,
             slide_type="content",
             order=2,
-            notes="Apresentar estrutura da proposta e principais tópicos"
+            notes="Apresentar estrutura da proposta e principais tópicos",
         )
-    
-    def _create_situation_slide(self, proposal, theme: PresentationTheme) -> PresentationSlide:
+
+    def _create_situation_slide(
+        self, proposal, theme: PresentationTheme
+    ) -> PresentationSlide:
         """Criar slide da situação atual"""
-        
+
         # Extrair informações da análise
         situation = proposal.situation_analysis
-        
+
         content = f"""
         <div style="padding: 30px; font-family: {theme.font_family};">
             <h2 style="color: {theme.primary_color}; border-bottom: 3px solid {theme.accent_color}; padding-bottom: 10px;">
@@ -222,18 +232,20 @@ class ProposalPresentation:
             </div>
         </div>
         """
-        
+
         return PresentationSlide(
             title="Situação Atual",
             content=content,
             slide_type="content",
             order=3,
-            notes="Contextualizar o cliente sobre sua situação atual e desafios"
+            notes="Contextualizar o cliente sobre sua situação atual e desafios",
         )
-    
-    def _create_analysis_slide(self, proposal, theme: PresentationTheme) -> PresentationSlide:
+
+    def _create_analysis_slide(
+        self, proposal, theme: PresentationTheme
+    ) -> PresentationSlide:
         """Criar slide de análise e oportunidades"""
-        
+
         content = f"""
         <div style="padding: 30px; font-family: {theme.font_family};">
             <h2 style="color: {theme.primary_color}; border-bottom: 3px solid {theme.accent_color}; padding-bottom: 10px;">
@@ -283,18 +295,20 @@ class ProposalPresentation:
             </div>
         </div>
         """
-        
+
         return PresentationSlide(
             title="Análise e Oportunidades",
             content=content,
             slide_type="content",
             order=4,
-            notes="Destacar o potencial identificado e oportunidades de crescimento"
+            notes="Destacar o potencial identificado e oportunidades de crescimento",
         )
-    
-    def _create_proposal_overview_slide(self, proposal, theme: PresentationTheme) -> PresentationSlide:
+
+    def _create_proposal_overview_slide(
+        self, proposal, theme: PresentationTheme
+    ) -> PresentationSlide:
         """Criar slide de visão geral da proposta"""
-        
+
         content = f"""
         <div style="padding: 30px; font-family: {theme.font_family};">
             <h2 style="color: {theme.primary_color}; border-bottom: 3px solid {theme.accent_color}; padding-bottom: 10px;">
@@ -342,18 +356,20 @@ class ProposalPresentation:
             </div>
         </div>
         """
-        
+
         return PresentationSlide(
             title="Nossa Proposta",
             content=content,
             slide_type="content",
             order=5,
-            notes="Apresentar visão geral da proposta e valor agregado"
+            notes="Apresentar visão geral da proposta e valor agregado",
         )
-    
-    def _create_strategy_slide(self, strategy, slide_number: int, theme: PresentationTheme) -> PresentationSlide:
+
+    def _create_strategy_slide(
+        self, strategy, slide_number: int, theme: PresentationTheme
+    ) -> PresentationSlide:
         """Criar slide para uma estratégia específica"""
-        
+
         content = f"""
         <div style="padding: 30px; font-family: {theme.font_family};">
             <h2 style="color: {theme.primary_color}; border-bottom: 3px solid {theme.accent_color}; padding-bottom: 10px;">
@@ -403,20 +419,22 @@ class ProposalPresentation:
             </div>
         </div>
         """
-        
+
         return PresentationSlide(
             title=f"Estratégia: {strategy.nome}",
             content=content,
             slide_type="content",
             order=slide_number,
-            notes=f"Detalhar implementação e benefícios da estratégia {strategy.nome}"
+            notes=f"Detalhar implementação e benefícios da estratégia {strategy.nome}",
         )
-    
-    def _create_timeline_slide(self, proposal, theme: PresentationTheme) -> PresentationSlide:
+
+    def _create_timeline_slide(
+        self, proposal, theme: PresentationTheme
+    ) -> PresentationSlide:
         """Criar slide do cronograma"""
-        
+
         timeline = proposal.implementation_timeline
-        
+
         content = f"""
         <div style="padding: 30px; font-family: {theme.font_family};">
             <h2 style="color: {theme.primary_color}; border-bottom: 3px solid {theme.accent_color}; padding-bottom: 10px;">
@@ -434,9 +452,11 @@ class ProposalPresentation:
                 </div>
             </div>
         """
-        
+
         # Adicionar fases
-        for i, phase in enumerate(timeline.get('phases', [])[:4], 1):  # Máximo 4 fases no slide
+        for i, phase in enumerate(
+            timeline.get("phases", [])[:4], 1
+        ):  # Máximo 4 fases no slide
             content += f"""
             <div style="margin: 20px 0; padding: 20px; background: {theme.background_color}; border-left: 5px solid {theme.secondary_color}; border-radius: 5px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
@@ -452,32 +472,36 @@ class ProposalPresentation:
                 </div>
                 <ul style="color: {theme.text_color}; margin: 10px 0;">
             """
-            
-            for activity in phase.get('activities', [])[:3]:  # Máximo 3 atividades por fase
+
+            for activity in phase.get("activities", [])[
+                :3
+            ]:  # Máximo 3 atividades por fase
                 content += f"<li>{activity}</li>"
-            
+
             content += """
                 </ul>
             </div>
             """
-        
+
         content += """
         </div>
         """
-        
+
         return PresentationSlide(
             title="Cronograma",
             content=content,
             slide_type="content",
             order=len(proposal.strategies) + 6,
-            notes="Apresentar cronograma detalhado e marcos importantes"
+            notes="Apresentar cronograma detalhado e marcos importantes",
         )
-    
-    def _create_investment_slide(self, proposal, theme: PresentationTheme) -> PresentationSlide:
+
+    def _create_investment_slide(
+        self, proposal, theme: PresentationTheme
+    ) -> PresentationSlide:
         """Criar slide de investimento"""
-        
+
         investment = proposal.investment_breakdown
-        
+
         content = f"""
         <div style="padding: 30px; font-family: {theme.font_family};">
             <h2 style="color: {theme.primary_color}; border-bottom: 3px solid {theme.accent_color}; padding-bottom: 10px;">
@@ -555,18 +579,20 @@ class ProposalPresentation:
             </div>
         </div>
         """
-        
+
         return PresentationSlide(
             title="Investimento e ROI",
             content=content,
             slide_type="content",
             order=len(proposal.strategies) + 7,
-            notes="Demonstrar estrutura de investimento e retorno esperado"
+            notes="Demonstrar estrutura de investimento e retorno esperado",
         )
-    
-    def _create_metrics_slide(self, proposal, theme: PresentationTheme) -> PresentationSlide:
+
+    def _create_metrics_slide(
+        self, proposal, theme: PresentationTheme
+    ) -> PresentationSlide:
         """Criar slide de métricas"""
-        
+
         content = f"""
         <div style="padding: 30px; font-family: {theme.font_family};">
             <h2 style="color: {theme.primary_color}; border-bottom: 3px solid {theme.accent_color}; padding-bottom: 10px;">
@@ -585,15 +611,20 @@ class ProposalPresentation:
                 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
         """
-        
+
         # Adicionar métricas principais
         key_metrics = [
-            {"icon": "📈", "name": "ROI Global", "target": proposal.expected_roi, "color": "#28a745"},
+            {
+                "icon": "📈",
+                "name": "ROI Global",
+                "target": proposal.expected_roi,
+                "color": "#28a745",
+            },
             {"icon": "💰", "name": "Receita", "target": "+50%", "color": "#007bff"},
             {"icon": "🎯", "name": "Conversão", "target": "+25%", "color": "#fd7e14"},
-            {"icon": "📊", "name": "Leads", "target": "+40%", "color": "#6f42c1"}
+            {"icon": "📊", "name": "Leads", "target": "+40%", "color": "#6f42c1"},
         ]
-        
+
         for metric in key_metrics:
             content += f"""
             <div style="background: {theme.background_color}; padding: 20px; border-radius: 10px; text-align: center; border-top: 3px solid {metric['color']};">
@@ -602,7 +633,7 @@ class ProposalPresentation:
                 <div style="color: {metric['color']}; font-size: 1.5em; font-weight: bold;">{metric['target']}</div>
             </div>
             """
-        
+
         content += f"""
                 </div>
                 
@@ -618,18 +649,20 @@ class ProposalPresentation:
             </div>
         </div>
         """
-        
+
         return PresentationSlide(
             title="Métricas de Sucesso",
             content=content,
             slide_type="content",
             order=len(proposal.strategies) + 8,
-            notes="Demonstrar como o sucesso será medido e acompanhado"
+            notes="Demonstrar como o sucesso será medido e acompanhado",
         )
-    
-    def _create_next_steps_slide(self, proposal, theme: PresentationTheme) -> PresentationSlide:
+
+    def _create_next_steps_slide(
+        self, proposal, theme: PresentationTheme
+    ) -> PresentationSlide:
         """Criar slide de próximos passos"""
-        
+
         content = f"""
         <div style="padding: 30px; font-family: {theme.font_family};">
             <h2 style="color: {theme.primary_color}; border-bottom: 3px solid {theme.accent_color}; padding-bottom: 10px;">
@@ -647,7 +680,7 @@ class ProposalPresentation:
                 </div>
             </div>
         """
-        
+
         # Adicionar próximos passos
         for i, step in enumerate(proposal.next_steps[:5], 1):
             content += f"""
@@ -660,7 +693,7 @@ class ProposalPresentation:
                 </div>
             </div>
             """
-        
+
         content += f"""
             <div style="margin-top: 40px; text-align: center; padding: 25px; background: {theme.background_color}; border-radius: 15px; border: 2px solid {theme.accent_color};">
                 <h3 style="color: {theme.primary_color}; margin-bottom: 15px;">
@@ -680,18 +713,18 @@ class ProposalPresentation:
             </div>
         </div>
         """
-        
+
         return PresentationSlide(
             title="Próximos Passos",
             content=content,
             slide_type="content",
             order=len(proposal.strategies) + 9,
-            notes="Explicar próximos passos e facilitar tomada de decisão"
+            notes="Explicar próximos passos e facilitar tomada de decisão",
         )
-    
+
     def _create_closing_slide(self, theme: PresentationTheme) -> PresentationSlide:
         """Criar slide de encerramento"""
-        
+
         content = f"""
         <div style="text-align: center; padding: 50px; background: linear-gradient(135deg, {theme.primary_color}, {theme.secondary_color}); color: white; border-radius: 15px; font-family: {theme.font_family};">
             <h1 style="font-size: 3em; margin-bottom: 30px;">
@@ -721,110 +754,116 @@ class ProposalPresentation:
             </div>
         </div>
         """
-        
+
         return PresentationSlide(
             title="Obrigado",
             content=content,
             slide_type="cover",
             order=len(self.themes) + 10,
-            notes="Encerrar apresentação e reforçar contato"
+            notes="Encerrar apresentação e reforçar contato",
         )
+
 
 def display_presentation_interface():
     """Interface para exibir apresentação"""
-    
+
     st.markdown("## 🎯 **Apresentação da Proposta**")
-    
-    if 'current_proposal' not in st.session_state:
+
+    if "current_proposal" not in st.session_state:
         st.warning("⚠️ Nenhuma proposta carregada. Gere uma proposta primeiro.")
         return
-    
-    proposal = st.session_state['current_proposal']
-    
+
+    proposal = st.session_state["current_proposal"]
+
     # Opções de tema
     theme_options = {
         "Profissional": "professional",
-        "Moderno": "modern", 
-        "Criativo": "creative"
+        "Moderno": "modern",
+        "Criativo": "creative",
     }
-    
+
     selected_theme = st.selectbox(
-        "🎨 Escolha o tema da apresentação:",
-        list(theme_options.keys())
+        "🎨 Escolha o tema da apresentação:", list(theme_options.keys())
     )
-    
+
     if st.button("🎯 Gerar Apresentação"):
         with st.spinner("🔄 Preparando apresentação..."):
-            
             # Gerar apresentação
             presenter = ProposalPresentation()
-            slides = presenter.generate_presentation(proposal, theme_options[selected_theme])
-            
+            slides = presenter.generate_presentation(
+                proposal, theme_options[selected_theme]
+            )
+
             # Salvar slides
-            st.session_state['presentation_slides'] = slides
-        
+            st.session_state["presentation_slides"] = slides
+
         st.success("✅ Apresentação gerada com sucesso!")
-        
+
         # Exibir slides
         display_slides(slides)
 
+
 def display_slides(slides: List[PresentationSlide]):
     """Exibir slides da apresentação"""
-    
+
     st.markdown("---")
     st.markdown("## 🎬 **Apresentação Gerada**")
-    
+
     # Navegação entre slides
     if len(slides) > 1:
         slide_titles = [f"Slide {i+1}: {slide.title}" for i, slide in enumerate(slides)]
-        selected_slide_index = st.selectbox("📋 Navegar pelos slides:", range(len(slide_titles)), format_func=lambda x: slide_titles[x])
+        selected_slide_index = st.selectbox(
+            "📋 Navegar pelos slides:",
+            range(len(slide_titles)),
+            format_func=lambda x: slide_titles[x],
+        )
     else:
         selected_slide_index = 0
-    
+
     # Exibir slide selecionado
     if slides:
         current_slide = slides[selected_slide_index]
-        
+
         # Título do slide
         st.markdown(f"### {current_slide.title}")
-        
+
         # Conteúdo do slide
         st.markdown(current_slide.content, unsafe_allow_html=True)
-        
+
         # Notas do apresentador
         if current_slide.notes:
             with st.expander("📝 Notas do Apresentador", expanded=False):
                 st.info(current_slide.notes)
-        
+
         # Navegação
         col1, col2, col3 = st.columns(3)
-        
+
         with col1:
             if selected_slide_index > 0:
                 if st.button("⬅️ Slide Anterior"):
                     st.rerun()
-        
+
         with col2:
             st.markdown(f"**Slide {selected_slide_index + 1} de {len(slides)}**")
-        
+
         with col3:
             if selected_slide_index < len(slides) - 1:
                 if st.button("➡️ Próximo Slide"):
                     st.rerun()
-    
+
     # Opções de exportação
     st.markdown("---")
-    
+
     col1, col2, col3 = st.columns(3)
-    
+
     with col1:
         if st.button("📱 Modo Apresentação"):
             st.info("🚀 Modo apresentação (Em desenvolvimento)")
-    
+
     with col2:
         if st.button("📄 Exportar PDF"):
             st.info("📄 Exportação para PDF (Em desenvolvimento)")
-    
+
     with col3:
         if st.button("📧 Enviar por Email"):
             st.info("📧 Envio por email (Em desenvolvimento)")

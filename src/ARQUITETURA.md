@@ -90,3 +90,51 @@ Quando migrarmos para Next.js/NestJS, esta estrutura facilitará:
 - **Hooks** → React Hooks (Next.js)
 
 > Para detalhes sobre a migração, consulte o roadmap de evolução tecnológica em `/docs/architecture/overview.md`.
+
+## Fluxos Reais do Código Migrado
+
+### Exemplo: Fluxo de Processamento e Geração de Relatório
+
+```mermaid
+graph TD;
+    A[Entrada de Dados] --> B[DataProcessor]
+    B --> C[AnalysisService]
+    C --> D[ReportingService]
+    D --> E[Exportação/Apresentação]
+```
+
+- **DataProcessor**: Limpa e valida os dados recebidos do cliente.
+- **AnalysisService**: Realiza análise estatística, gera insights e recomendações.
+- **ReportingService**: Gera relatórios executivos, propostas e apresentações.
+- **Exportação/Apresentação**: Exporta para PDF, Google Sheets ou apresenta via Streamlit.
+
+### Integração Entre Serviços
+
+```python
+from services.data.data_processor import DataProcessor
+from services.analysis.analysis_service import AnalysisService
+from services.reporting.reporting_service import ReportingService
+import pandas as pd
+
+df = pd.read_csv('dados.csv')
+
+# Processamento
+processor = DataProcessor(df)
+dados_limpos = processor.clean_data()
+
+# Análise
+analysis = AnalysisService(dados_limpos)
+insights = analysis.run_full_analysis()
+
+# Relatório
+reporting = ReportingService(dados_limpos)
+relatorio = reporting.generate_full_report()
+print(relatorio)
+```
+
+### Testes Automatizados
+
+- Todos os serviços possuem testes unitários em `src/tests/`
+- Fluxos de integração testados em `test_integration_data_flow.py`
+
+---
