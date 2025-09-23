@@ -6,10 +6,9 @@ import pandas as pd
 import numpy as np
 from typing import Optional, Dict, List, Any
 from io import StringIO
-from src.services.logging_config import get_logger
-import logging
+from services.logging_config import get_logger
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 class DataProcessor:
@@ -17,7 +16,6 @@ class DataProcessor:
         self.data: Optional[pd.DataFrame] = None
         self.original_data: Optional[pd.DataFrame] = None
         self.metadata: Dict[str, Any] = {}
-        logger = get_logger(__name__)
 
     def load_csv_data(self, uploaded_file) -> pd.DataFrame:
         """
@@ -25,7 +23,12 @@ class DataProcessor:
         """
         try:
             if hasattr(uploaded_file, 'getvalue'):
-                stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
+                value = uploaded_file.getvalue()
+                # Se for bytes, decodifica, se for string, usa direto
+                if isinstance(value, bytes):
+                    stringio = StringIO(value.decode("utf-8"))
+                else:
+                    stringio = StringIO(value)
                 self.data = pd.read_csv(stringio)
             else:
                 self.data = pd.read_csv(uploaded_file)

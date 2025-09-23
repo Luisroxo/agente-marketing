@@ -5,7 +5,7 @@ Estrutura moderna para o Agente Marketing IA
 import pandas as pd
 from datetime import datetime
 from typing import Dict, List, Optional, Any
-from src.services.logging_config import get_logger
+from services.logging_config import get_logger
 logger = get_logger(__name__)
 
 class ReportingService:

@@ -8,10 +8,9 @@ from typing import Dict, List, Tuple, Optional, Any
 from scipy import stats
 import warnings
 warnings.filterwarnings('ignore')
-import logging
-from src.services.logging_config import get_logger
+from services.logging_config import get_logger
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 class AnalysisService:
     """
