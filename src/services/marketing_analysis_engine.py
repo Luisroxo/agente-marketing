@@ -1,3 +1,6 @@
+from src.services.logging_config import get_logger
+
+logger = get_logger(__name__)
 """
 Motor de Análise IA para Marketing
 Analisa perfil do cliente e gera insights estratégicos
@@ -5,8 +8,6 @@ Analisa perfil do cliente e gera insights estratégicos
 
 from dataclasses import dataclass
 from typing import List, Dict, Any
-import json
-from datetime import datetime
 
 @dataclass
 class ClientProfile:

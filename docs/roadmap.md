@@ -50,12 +50,12 @@
 
 ## 2. Padronização e Limpeza de Código
 - [ ] Remover POCs e apps legados não utilizados
-  - [ ] app_simples.py
+  - [x] app_simples.py (REMOVIDO — não utilizado)
   - [x] app_tally_integration.py (REMOVIDO — legado, não utilizado)
-  - [ ] apps duplicados em src/
-- [ ] Padronizar nomenclatura de arquivos e funções
-- [ ] Adotar padrão de logging centralizado
-- [ ] Implementar tratamento de erros consistente
+  - [x] apps duplicados em src/ (NÃO ENCONTRADO — estrutura limpa)
+- [x] Padronizar nomenclatura de arquivos e funções
+- [x] Adotar padrão de logging centralizado
+- [x] Implementar tratamento de erros consistente
 
 ## 3. Testes Automatizados
 - [ ] Planejar cobertura de testes

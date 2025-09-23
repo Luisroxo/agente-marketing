@@ -1,15 +1,14 @@
+from src.services.logging_config import get_logger
+
+logger = get_logger(__name__)
 """
 Módulo de Apresentação de Propostas
 Cria apresentações profissionais para propostas de marketing
 """
 
 from dataclasses import dataclass
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Optional
 import streamlit as st
-import plotly.express as px
-import plotly.graph_objects as go
-import pandas as pd
-from datetime import datetime
 
 @dataclass
 class PresentationSlide:

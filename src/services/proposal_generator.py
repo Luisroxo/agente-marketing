@@ -1,13 +1,14 @@
+from src.services.logging_config import get_logger
+
+logger = get_logger(__name__)
 """
 Gerador de Propostas de Marketing
 Cria propostas profissionais baseadas na análise IA
 """
 
 from dataclasses import dataclass
-from typing import List, Dict, Any, Optional
-import json
-from datetime import datetime, timedelta
-import pandas as pd
+from typing import List, Dict, Any
+from datetime import datetime
 
 @dataclass
 class ProposalSection:

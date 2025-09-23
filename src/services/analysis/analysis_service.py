@@ -9,6 +9,7 @@ from scipy import stats
 import warnings
 warnings.filterwarnings('ignore')
 import logging
+from src.services.logging_config import get_logger
 
 logger = logging.getLogger(__name__)
 
@@ -60,7 +61,6 @@ class AnalysisService:
         
         for col in numeric_cols:
             col_data = self.data[col].dropna()
-            
             stats_dict[col] = {
                 'count': len(col_data),
                 'mean': col_data.mean(),
@@ -78,7 +78,6 @@ class AnalysisService:
                 'kurtosis': col_data.kurtosis(),
                 'coefficient_variation': (col_data.std() / col_data.mean()) * 100 if col_data.mean() != 0 else 0
             }
-        
         self.analysis_cache[cache_key] = stats_dict
         return stats_dict
     
@@ -109,11 +108,9 @@ class AnalysisService:
         for col in categorical_cols:
             col_data = self.data[col].dropna()
             value_counts = col_data.value_counts()
-            
             # Calcular índice de diversidade (Shannon)
             proportions = value_counts / len(col_data)
             shannon_diversity = -sum(p * np.log(p) for p in proportions if p > 0)
-            
             analysis_dict[col] = {
                 'total_count': len(col_data),
                 'unique_values': col_data.nunique(),
@@ -127,7 +124,6 @@ class AnalysisService:
                 'shannon_diversity': shannon_diversity,
                 'top_3_values': value_counts.head(3).to_dict()
             }
-        
         self.analysis_cache[cache_key] = analysis_dict
         return analysis_dict
     
