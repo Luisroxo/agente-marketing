@@ -154,6 +154,39 @@ streamlit run src/app_consultor.py
 - **Local**: http://localhost:8501
 - **Rede**: http://[seu-ip]:8501
 
+## ⚙️ Variáveis de Ambiente e Setup
+
+### Variáveis de Ambiente
+
+Crie um arquivo `.env` na raiz do projeto com as variáveis necessárias para integrações e execução local:
+
+```env
+GOOGLE_SHEETS_CREDENTIALS=credenciais.json
+DATABASE_URL=postgresql://usuario:senha@localhost:5432/marketing_db
+SECRET_KEY=uma-chave-secreta
+DEBUG=True
+```
+
+- `GOOGLE_SHEETS_CREDENTIALS`: Caminho para o arquivo de credenciais do Google Sheets
+- `DATABASE_URL`: String de conexão para o banco PostgreSQL
+- `SECRET_KEY`: Chave para autenticação/criptografia
+- `DEBUG`: Ativa modo debug para desenvolvimento
+
+### Setup Inicial
+
+1. Instale as dependências:
+   ```bash
+   pip install -r requirements.txt
+   ```
+2. Configure o arquivo `.env` conforme acima
+3. Execute as migrations do banco (se aplicável)
+4. Inicie a aplicação:
+   ```bash
+   streamlit run src/app_consultor.py
+   ```
+
+---
+
 ## � Próximas Funcionalidades
 
 ### 📋 Roadmap Futuro
@@ -234,6 +267,63 @@ agente-marketing/
 └── tests/         # Testes unitários
 ```
 
-## 👥 Contribuição
+## 🧑‍💻 Exemplos de Uso dos Serviços
 
-Este é um projeto em desenvolvimento. Feedback e sugestões são bem-vindos!
+### Exemplo: ReportingService
+```python
+from services.reporting.reporting_service import ReportingService
+import pandas as pd
+
+df = pd.DataFrame({
+    'nome': ['Cliente A', 'Cliente B'],
+    'valor': [10000, 15000],
+    'segmento': ['B2B', 'E-commerce']
+})
+
+service = ReportingService(df)
+print(service.generate_executive_summary())
+print(service.generate_full_report())
+```
+
+### Exemplo: DataProcessor
+```python
+from services.data.data_processor import DataProcessor
+import pandas as pd
+
+df = pd.DataFrame({
+    'canal': ['Instagram', 'LinkedIn'],
+    'leads': [120, 80]
+})
+
+processor = DataProcessor(df)
+limpo = processor.clean_data()
+print(limpo)
+```
+
+### Exemplo: AnalysisService
+```python
+from services.analysis.analysis_service import AnalysisService
+import pandas as pd
+
+df = pd.DataFrame({
+    'orcamento': [5000, 20000],
+    'segmento': ['Varejo', 'Serviços']
+})
+
+analysis = AnalysisService(df)
+resultados = analysis.run_full_analysis()
+print(resultados)
+```
+
+### Exemplo: GoogleSheetsService
+```python
+from services.external.googleSheetsService import GoogleSheetsService
+
+sheets = GoogleSheetsService(credentials_path='credenciais.json')
+sheets.export_to_sheet('Relatorio', [['Nome', 'Valor'], ['Cliente A', 10000]])
+```
+
+### Exemplo: Testes Automatizados
+```bash
+pytest src/tests/
+```

@@ -1,4 +1,3 @@
-
 # 💬 Histórico de Conversas - Agente Marketing IA
 
 > Documentação das conversas e decisões técnicas do projeto
@@ -372,3 +371,19 @@ Consulte o arquivo `GIT_SETUP.md` para instruções detalhadas de como:
 - Conectar repositório local
 - Fazer push inicial
 - Configurar workflow de desenvolvimento
+
+---
+
+## 23/09/2025 — Fase Enterprise, Documentação e CI/CD
+
+- **Contexto:** Finalizada migração para estrutura enterprise, padronização de código, implementação de testes automatizados, documentação expandida e integração de CI/CD.
+- **Ações:**
+   - Refatoração completa dos serviços principais (ReportingService, DataProcessor, AnalysisService, GoogleSheetsService)
+   - Remoção de blocos soltos, docstrings fora de métodos e correção de recuo
+   - README.md atualizado com exemplos práticos de uso dos serviços
+   - ARQUITETURA.md expandido com fluxos reais e integração entre módulos
+   - Documentação de variáveis de ambiente e setup
+   - ADR-001 (arquitetura modular) e ADR-002 (monitoramento/alertas) criados
+   - Workflow CI/CD expandido para linter, formatter e cobertura mínima
+   - Roadmap atualizado para refletir progresso e próximos passos
+- **Justificativa:** Garantir qualidade, escalabilidade e onboarding rápido para devs e consultores. Projeto pronto para evolução futura (backend enterprise, monitoramento, exportação automática).

@@ -1,4 +1,3 @@
-
 # Roadmap Técnico — Agente Marketing (Migração Enterprise + Modularização)
 
 ## Regras de Execução Automática
@@ -58,44 +57,46 @@
 - [x] Implementar tratamento de erros consistente
 
 ## 3. Testes Automatizados
-- [ ] Planejar cobertura de testes
-  - [ ] Listar funções críticas para teste unitário
+- [x] Planejar cobertura de testes
+  - [x] Listar funções críticas para teste unitário
   - [ ] Listar fluxos para teste de integração
-- [ ] Implementar testes unitários em tests/
-  - [ ] Testar src/services/data_processor.py
-  - [ ] Testar src/services/basic_analysis.py
-  - [ ] Testar src/services/google_sheets.py
+- [x] Implementar testes unitários em tests/
+  - [x] Testar src/services/data_processor.py
+  - [x] Testar src/services/analysis/analysis_service.py
+  - [x] Testar src/services/reporting/reporting_service.py
+  - [x] Testar src/services/analysis/statistical_analysis.py
+  - [x] Testar src/services/external/googleSheetsService.py
 - [ ] Implementar testes de integração
-  - [ ] Testar fluxo completo de processamento de dados
-  - [ ] Testar integração com Google Sheets
-- [ ] Automatizar execução dos testes (pytest)
+  - [x] Testar fluxo completo de processamento de dados
+  - [x] Testar integração com Google Sheets
+- [x] Automatizar execução dos testes (pytest)
 
 ## 4. Documentação e ADRs
-- [ ] Atualizar README.md com nova estrutura e exemplos de uso
-- [ ] Atualizar ARQUITETURA.md com fluxos reais do código migrado
-- [ ] Atualizar/expandir ADRs conforme decisões de arquitetura
-- [ ] Documentar exemplos de uso dos serviços e componentes
-- [ ] Documentar variáveis de ambiente e setup
+- [x] Atualizar README.md com nova estrutura e exemplos de uso
+- [x] Atualizar ARQUITETURA.md com fluxos reais do código migrado
+- [x] Atualizar/expandir ADRs conforme decisões de arquitetura
+- [x] Documentar exemplos de uso dos serviços e componentes
+- [x] Documentar variáveis de ambiente e setup
 
 ## 5. Autenticação e Banco de Dados (Fase 2)
-- [ ] Planejar modelo de usuários e autenticação
-  - [ ] Definir modelo de dados para usuários
-  - [ ] Escolher biblioteca de autenticação (ex: FastAPI Auth, OAuth)
-- [ ] Integrar PostgreSQL
-  - [ ] Definir modelo de dados relacional
-  - [ ] Criar migrations iniciais
-  - [ ] Integrar ORM (ex: SQLAlchemy)
-- [ ] Refatorar serviços para usar banco relacional
-  - [ ] Persistir dados de análise
-  - [ ] Persistir logs e relatórios
-- [ ] Implementar testes de autenticação e banco
+- [x] Planejar modelo de usuários e autenticação
+  - [x] Definir modelo de dados para usuários
+  - [x] Escolher biblioteca de autenticação (ex: FastAPI Auth, OAuth)
+- [x] Integrar PostgreSQL (usando SQLite para testes locais)
+  - [x] Definir modelo de dados relacional
+  - [x] Criar migrations iniciais (via SQLAlchemy)
+  - [x] Integrar ORM (ex: SQLAlchemy)
+- [x] Refatorar serviços para usar banco relacional
+  - [x] Persistir dados de análise
+  - [x] Persistir logs e relatórios
+- [x] Implementar testes de autenticação e banco
 
 ## 6. CI/CD e Qualidade
-- [ ] Configurar workflow GitHub Actions
-  - [ ] Rodar testes unitários e integração em cada push
-  - [ ] Validar cobertura mínima
-- [ ] Adotar linter e formatter automáticos (ex: black, flake8)
-- [ ] Documentar fluxo de CI/CD
+- [x] Configurar workflow GitHub Actions
+  - [x] Rodar testes unitários e integração em cada push
+  - [x] Validar cobertura mínima
+- [x] Adotar linter e formatter automáticos (ex: black, flake8)
+- [x] Documentar fluxo de CI/CD
 
 ## 7. Evolução Futura (Opcional)
 - [ ] Planejar integração com backend enterprise (NestJS)

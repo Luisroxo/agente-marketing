@@ -6,6 +6,9 @@ class ReportingService:
     def __init__(self, data: Optional[pd.DataFrame] = None):
         self.data = data
 
+    def set_data(self, df):
+        self.data = df
+
     def _calculate_data_quality(self) -> float:
         if self.data is None or self.data.empty:
             return 0.0
