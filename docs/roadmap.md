@@ -35,7 +35,7 @@
     - [x] basic_analysis.py
   - [x] Migrar componentes de interface para src/components/
   - [x] Elementos Streamlit customizados
-    - [ ] Layouts e painéis
+    - [x] Layouts e painéis (OBSOLETO — frontend Lovable)
   - [x] Migrar integrações externas para src/services/
     - [x] google_sheets.py
     - [x] report_generator.py
@@ -59,14 +59,14 @@
 ## 3. Testes Automatizados
 - [x] Planejar cobertura de testes
   - [x] Listar funções críticas para teste unitário
-  - [ ] Listar fluxos para teste de integração
+  - [x] Listar fluxos para teste de integração
 - [x] Implementar testes unitários em tests/
   - [x] Testar src/services/data_processor.py
   - [x] Testar src/services/analysis/analysis_service.py
   - [x] Testar src/services/reporting/reporting_service.py
   - [x] Testar src/services/analysis/statistical_analysis.py
   - [x] Testar src/services/external/googleSheetsService.py
-- [ ] Implementar testes de integração
+- [x] Implementar testes de integração
   - [x] Testar fluxo completo de processamento de dados
   - [x] Testar integração com Google Sheets
 - [x] Automatizar execução dos testes (pytest)
@@ -99,7 +99,7 @@
 - [x] Documentar fluxo de CI/CD
 
 ## 7. Evolução Futura (Opcional)
-- [ ] Planejar integração com backend enterprise (NestJS)
-- [ ] Planejar migração do frontend para Next.js
-- [ ] Adicionar monitoramento e alertas (Sentry, Prometheus)
-- [ ] Implementar exportação de relatórios automáticos
+- [x] Planejar integração com backend enterprise (NestJS)
+- [x] Planejar migração do frontend para Next.js
+- [x] Adicionar monitoramento e alertas (Sentry, Prometheus)
+- [x] Implementar exportação de relatórios automáticos
